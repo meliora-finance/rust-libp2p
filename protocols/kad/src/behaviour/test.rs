@@ -39,7 +39,7 @@ use libp2p_core::{
     transport::MemoryTransport,
     multiaddr::{Protocol, Multiaddr, multiaddr},
     upgrade,
-    multihash::{Code, Multihash, MultihashDigest},
+    multihash::{Code, Multihash},
 };
 use libp2p_noise as noise;
 use libp2p_swarm::Swarm;
@@ -129,7 +129,7 @@ fn build_fully_connected_nodes_with_config(total: usize, cfg: KademliaConfig)
 }
 
 fn random_multihash() -> Multihash {
-    Multihash::wrap(Code::Sha2_256.into(), &thread_rng().gen::<[u8; 32]>()).unwrap()
+    Code::Sha2_256.wrap(&thread_rng().gen::<[u8; 32]>())
 }
 
 #[derive(Clone, Debug)]

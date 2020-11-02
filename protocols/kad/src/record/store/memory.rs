@@ -220,7 +220,7 @@ mod tests {
     use rand::Rng;
 
     fn random_multihash() -> Multihash {
-        Multihash::wrap(Code::Sha2_256.into(), &rand::thread_rng().gen::<[u8; 32]>()).unwrap()
+        Code::Sha2_256.wrap(&rand::thread_rng().gen::<[u8; 32]>())
     }
 
     fn distance(r: &ProviderRecord) -> kbucket::Distance {

@@ -160,7 +160,7 @@ mod tests {
     impl Arbitrary for Key {
         fn arbitrary<G: Gen>(_: &mut G) -> Key {
             let hash = rand::thread_rng().gen::<[u8; 32]>();
-            Key::from(Multihash::wrap(Code::Sha2_256.into(), &hash).unwrap())
+            Key::from(Code::Sha2_256.wrap(&hash))
         }
     }
 

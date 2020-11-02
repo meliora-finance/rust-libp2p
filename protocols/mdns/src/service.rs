@@ -589,7 +589,7 @@ mod tests {
         ($runtime_name:ident, $service_name:ty, $block_on_fn:tt) => {
     mod $runtime_name {
         use libp2p_core::PeerId;
-        use libp2p_core::multihash::{Code, MultihashDigest};
+        use libp2p_core::multihash::Code;
         use std::time::Duration;
         use crate::service::MdnsPacket;
 

@@ -436,7 +436,7 @@ mod tests {
     use rand::{Rng, seq::SliceRandom};
     use std::collections::HashSet;
     use std::iter;
-    use libp2p_core::multihash::{Multihash, Code};
+    use libp2p_core::multihash::Code;
 
     impl Arbitrary for ResultIter<std::vec::IntoIter<Key<PeerId>>> {
         fn arbitrary<G: Gen>(g: &mut G) -> Self {
@@ -527,7 +527,7 @@ mod tests {
 
     fn random_peers<R: Rng>(n: usize, g: &mut R) -> Vec<PeerId> {
         (0 .. n).map(|_| PeerId::from_multihash(
-            Multihash::wrap(Code::Sha2_256.into(), &g.gen::<[u8; 32]>()).unwrap()
+            Code::Sha2_256.wrap(&g.gen::<[u8; 32]>())
         ).unwrap()).collect()
     }
 

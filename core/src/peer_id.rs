@@ -19,7 +19,7 @@
 // DEALINGS IN THE SOFTWARE.
 
 use crate::PublicKey;
-use crate::multihash::{Multihash, Code, MultihashDigest};
+use crate::multihash::{Code, Multihash};
 use bs58;
 use thiserror::Error;
 use rand::Rng;
@@ -57,13 +57,11 @@ impl PeerId {
     pub fn from_public_key(key: PublicKey) -> PeerId {
         let key_enc = key.into_protobuf_encoding();
 
-        let hash_algorithm = if key_enc.len() <= MAX_INLINE_KEY_LENGTH {
-            Code::Identity
+        let multihash = if key_enc.len() <= MAX_INLINE_KEY_LENGTH {
+            Code::Identity.digest(&key_enc)
         } else {
-            Code::Sha2_256
+            Code::Sha2_256.digest(&key_enc)
         };
-
-        let multihash = hash_algorithm.digest(&key_enc);
 
         PeerId { multihash }
     }
@@ -97,7 +95,7 @@ impl PeerId {
     pub fn random() -> PeerId {
         let peer_id = rand::thread_rng().gen::<[u8; 32]>();
         PeerId {
-            multihash: Multihash::wrap(Code::Identity.into(), &peer_id).expect("The digest size is never too large"),
+            multihash: Code::Identity.wrap(&peer_id),
         }
     }
 
