@@ -327,9 +327,9 @@ must not be skipped!
 - Listeners now have an identifier and can be stopped.
 - Added `NetworkBehaviour::inject_listener_error` and `NetworkBehaviour::inject_listener_closed`. For diagnostic purposes, listeners can now report errors on incoming connections, such as when calling `accept(2)` fails.
 - Fixed tasks sometimes not being notified when a network event happens in `libp2p-mplex`.
-- Fixed a memory leak in `libp2p-kad`.
-- Added `Toggle::is_enabled()`.
-- Removed `IdentifyTransport`.
+- Fixed a memory leak in `libp2p-kad`
+- Added `Toggle::is_enabled()`
+- Removed `IdentifyTransport`
 
 # Version 0.11.0 (2019-07-18)
 
